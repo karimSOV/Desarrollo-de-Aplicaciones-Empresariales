@@ -1,0 +1,71 @@
+{% extends "quiz/base.html" %}
+
+{% block title %}Add question - {{ exam.title }} - Quiz{% endblock %}
+
+{% block content %}
+    <h2>Add a question to: {{ exam.title }}</h2>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <section class="card form-section">
+            <h3 class="section-title">
+                Question
+                <span class="hint">Write the statement of the question</span>
+            </h3>
+            <label for="{{ question_form.text.id_for_label }}">Text</label>
+            {{ question_form.text }}
+            {% for error in question_form.text.errors %}
+                <span class="field-error">{{ error }}</span>
+            {% endfor %}
+        </section>
+
+        <section class="card form-section">
+            <h3 class="section-title">
+                Choices
+                <span class="hint">Exactly one must be marked as correct</span>
+            </h3>
+
+            {{ choice_formset.management_form }}
+            {% for form in choice_formset %}
+                <fieldset class="choice-card">
+                    <div class="choice-head">
+                        <span class="choice-title">Choice #{{ forloop.counter }}</span>
+                        {% if form.instance.pk %}
+                            <label class="delete-wrap">{{ form.DELETE }} <span>Delete</span></label>
+                        {% endif %}
+                    </div>
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    <div class="choice-body">
+                        <div class="choice-field">
+                            <label for="{{ form.text.id_for_label }}">Option text</label>
+                            {{ form.text }}
+                            {% for error in form.text.errors %}
+                                <span class="field-error">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <label class="checkbox-wrap" for="{{ form.is_correct.id_for_label }}">
+                            {{ form.is_correct }}
+                            <span>{{ form.is_correct.label }}</span>
+                        </label>
+                    </div>
+                </fieldset>
+            {% endfor %}
+
+            {% if choice_formset.non_form_errors %}
+                <div class="alert">
+                    {% for error in choice_formset.non_form_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+
+        <p class="actions">
+            <button class="btn btn-primary" type="submit">Save question</button>
+            <a class="btn btn-secondary" href="{% url 'quiz:exam_detail' exam.pk %}">Cancel</a>
+        </p>
+    </form>
+{% endblock %}

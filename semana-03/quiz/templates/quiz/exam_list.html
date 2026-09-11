@@ -1,0 +1,22 @@
+{% extends "quiz/base.html" %}
+
+{% block title %}Exams - Quiz{% endblock %}
+
+{% block content %}
+    <h2>Available Exams</h2>
+    {% if exams %}
+        <ul class="exam-grid">
+            {% for exam in exams %}
+                <li class="exam-card">
+                    <a class="exam-title" href="{% url 'quiz:exam_detail' exam.pk %}">{{ exam.title }}</a>
+                    <p class="date-meta">{{ exam.created_at|date:"d/m/Y H:i" }}</p>
+                    {% if exam.description %}
+                        <p class="exam-desc">{{ exam.description }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state">No exams available yet.</p>
+    {% endif %}
+{% endblock %}

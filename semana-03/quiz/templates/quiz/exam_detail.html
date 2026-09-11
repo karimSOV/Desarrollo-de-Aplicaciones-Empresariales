@@ -1,0 +1,45 @@
+{% extends "quiz/base.html" %}
+
+{% block title %}{{ exam.title }} - Quiz{% endblock %}
+
+{% block content %}
+    <h2>{{ exam.title }}</h2>
+    <p class="date-meta">Created: {{ exam.created_at|date:"d/m/Y H:i" }}</p>
+    {% if exam.description %}
+        <p class="exam-desc">{{ exam.description }}</p>
+    {% endif %}
+
+    <h3>Questions</h3>
+    {% if exam.questions.all %}
+        <div class="question-list">
+            {% for question in exam.questions.all %}
+                <article class="card question-card">
+                    <h4 class="question-text">
+                        <span class="question-number">{{ forloop.counter }}</span>{{ question.text }}
+                        <span class="score-badge">{{ question.score }} pts</span>
+                    </h4>
+                    <ul class="choice-list">
+                        {% for choice in question.choices.all %}
+                            <li class="choice-item{% if request.user.is_staff and choice.is_correct %} is-correct{% endif %}">
+                                <span class="choice-text">{{ choice.text }}</span>
+                                {% if request.user.is_staff and choice.is_correct %}
+                                    <span class="correct-badge">(correct)</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">This exam has no questions yet.</p>
+    {% endif %}
+
+    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 1.5rem 0;">
+
+    <p class="actions">
+        <a class="btn btn-primary" href="{% url 'quiz:question_create' exam.pk %}">Add a question</a>
+        <span class="divider">|</span>
+        <a class="btn btn-secondary" href="{% url 'quiz:exam_list' %}">Back to exams</a>
+    </p>
+{% endblock %}

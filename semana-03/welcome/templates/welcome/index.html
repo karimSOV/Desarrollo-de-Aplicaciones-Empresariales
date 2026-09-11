@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ nombre }} - {{ titulo }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+            background-color: #000000;
+            background-image:
+                url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='4'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'%20opacity='0.07'/%3E%3C/svg%3E"),
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(135deg, #0a1a3a 0%, #04070d 55%, #000000 100%);
+            background-size: 160px 160px, 44px 44px, 44px 44px, cover;
+            background-position: 0 0, 0 0, 0 0, center;
+            background-repeat: repeat, repeat, repeat, no-repeat;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: -30%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255, 45, 149, 0.20), transparent 45%),
+                radial-gradient(circle at 75% 45%, rgba(0, 229, 255, 0.16), transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(124, 58, 237, 0.18), transparent 45%);
+            animation: glowMove 22s ease-in-out infinite alternate,
+                        hueSpin 16s linear infinite;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            left: -10%;
+            right: -10%;
+            bottom: -8%;
+            height: 60vh;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.5;
+            background:
+                repeating-linear-gradient(0deg, transparent 0 30px, rgba(0, 229, 255, 0.22) 30px 31px),
+                repeating-linear-gradient(90deg, transparent 0 30px, rgba(255, 45, 149, 0.14) 30px 31px);
+            transform: perspective(260px) rotateX(58deg);
+            transform-origin: bottom center;
+            -webkit-mask-image: linear-gradient(to top, black 30%, transparent 95%);
+            mask-image: linear-gradient(to top, black 30%, transparent 95%);
+            animation: gridScroll 1.6s linear infinite;
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(160deg, #f8fbff 0%, #ffffff 60%, #e8f1fb 100%);
+            padding: 3.5rem 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 229, 255, 0.25);
+            box-shadow:
+                0 0 18px rgba(255, 45, 149, 0.25),
+                0 0 45px rgba(0, 229, 255, 0.12),
+                0 24px 60px rgba(0, 0, 0, 0.55);
+            animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            animation: none;
+            transform: translateY(-12px);
+            border-color: rgba(0, 229, 255, 0.55);
+            box-shadow:
+                0 0 30px rgba(255, 45, 149, 0.45),
+                0 0 80px rgba(0, 229, 255, 0.25),
+                0 34px 80px rgba(0, 0, 0, 0.7);
+        }
+
+        .card h1 {
+            font-family: 'Orbitron', 'Poppins', sans-serif;
+            font-size: clamp(1.7rem, 5.5vw, 3.2rem);
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #00e5ff 0%, #7b5cff 50%, #ff2d95 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #7b5cff;
+            filter: drop-shadow(0 0 16px rgba(255, 45, 149, 0.35))
+                    drop-shadow(0 0 30px rgba(0, 229, 255, 0.15));
+        }
+
+        .card p {
+            font-size: clamp(1rem, 3vw, 1.35rem);
+            font-weight: 300;
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card footer {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: #718096;
+            border-top: 1px solid rgba(0, 229, 255, 0.25);
+            padding-top: 1.25rem;
+        }
+
+        @keyframes glowMove {
+            from {
+                transform: translate3d(-4%, -2%, 0);
+            }
+            to {
+                transform: translate3d(4%, 3%, 0);
+            }
+        }
+
+        @keyframes hueSpin {
+            from {
+                filter: hue-rotate(0deg);
+            }
+            to {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        @keyframes gridScroll {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 0 -31px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 2.5rem 1.5rem;
+                border-radius: 20px;
+            }
+
+            body::after {
+                opacity: 0.35;
+                height: 45vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <h1>{{ nombre }}</h1>
+        <p>{{ titulo }}</p>
+        <footer>Hecho con Django 6.1 (última versión) y Python</footer>
+    </main>
+</body>
+</html>
