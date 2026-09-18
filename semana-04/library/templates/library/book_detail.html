@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ book.title }}</title>
+    <style>
+        :root {
+            --border: #e4e4e7;
+            --muted: #6b7280;
+            --accent: #2563eb;
+            --accent-soft: #eff6ff;
+            --bg: #f4f5f7;
+            --card: #ffffff;
+            --text: #1f2328;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 2.5rem 1rem;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .page {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        h1 {
+            margin: 0 0 0.35rem;
+            font-size: 1.7rem;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin: 0 0 1.75rem;
+        }
+        .meta span:not(:last-child)::after {
+            content: "\00b7";
+            margin: 0 0.5rem;
+            color: var(--border);
+        }
+
+        section {
+            padding: 1.25rem 0;
+            border-top: 1px solid var(--border);
+        }
+        section:first-of-type { border-top: none; padding-top: 0; }
+
+        h2 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            margin: 0 0 0.75rem;
+        }
+
+        .badges {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        .badges li {
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .pub-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .pub-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .pub-list li:last-child { border-bottom: none; }
+        .pub-name { font-weight: 600; }
+        .pub-detail { color: var(--muted); font-size: 0.85rem; display: block; }
+
+        .author {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .author img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .author-name { font-weight: 600; margin: 0 0 0.25rem; }
+        .author-detail { color: var(--muted); font-size: 0.85rem; margin: 0.15rem 0; }
+        .author-bio { margin: 0.5rem 0 0; font-size: 0.9rem; }
+
+        .empty { color: var(--muted); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a class="back-link" href="/admin/">&larr; Back to admin</a>
+
+        <div class="card">
+            <h1>{{ book.title }}</h1>
+            <p class="meta">
+                <span>ISBN {{ book.isbn|default:"—" }}</span>
+                <span>{{ book.publication_year|default:"—" }}</span>
+                <span>${{ book.price }}</span>
+            </p>
+
+            <section>
+                <h2>Categories</h2>
+                {% if book.categories.all %}
+                    <ul class="badges">
+                        {% for category in book.categories.all %}
+                            <li>{{ category.name }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty">No categories assigned.</p>
+                {% endif %}
+            </section>
+
+            <section>
+                <h2>Publications</h2>
+                {% if book.publications.all %}
+                    <ul class="pub-list">
+                        {% for publication in book.publications.all %}
+                            <li>
+                                <span class="pub-name">{{ publication.publisher.name }}</span>
+                                <span class="pub-detail">Edition {{ publication.edition }} &middot; {{ publication.publication_date }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty">No publication records.</p>
+                {% endif %}
+            </section>
+
+            <section>
+                <h2>Author</h2>
+                <div class="author">
+                    {% if book.author.profile.photo %}
+                        <img src="{{ book.author.profile.photo.url }}" alt="Photo of {{ book.author }}">
+                    {% endif %}
+                    <div>
+                        <p class="author-name">{{ book.author.first_name }} {{ book.author.last_name }}</p>
+                        {% if book.author.profile %}
+                            <p class="author-detail">{{ book.author.profile.nationality|default:"—" }} &middot; born {{ book.author.profile.birth_date|default:"—" }}</p>
+                            <p class="author-bio">{{ book.author.profile.bio|default:"No biography available." }}</p>
+                        {% else %}
+                            <p class="author-detail">No profile for this author.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

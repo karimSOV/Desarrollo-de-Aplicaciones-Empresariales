@@ -1,0 +1,171 @@
+[
+  {
+    "model": "library.author",
+    "pk": 1,
+    "fields": {
+      "first_name": "Alice",
+      "last_name": "Morgan",
+      "email": "alice.morgan@example.com"
+    }
+  },
+  {
+    "model": "library.author",
+    "pk": 2,
+    "fields": {
+      "first_name": "Robert",
+      "last_name": "Blake",
+      "email": "robert.blake@example.com"
+    }
+  },
+  {
+    "model": "library.authorprofile",
+    "pk": 1,
+    "fields": {
+      "author": 1,
+      "bio": "Fantasy and science fiction writer focused on environmental themes.",
+      "birth_date": "1978-04-12",
+      "nationality": "British",
+      "photo": "authors/alice_morgan.jpg"
+    }
+  },
+  {
+    "model": "library.publisher",
+    "pk": 1,
+    "fields": {
+      "name": "Sunrise Books",
+      "country": "United Kingdom",
+      "website": "https://sunrise.example.com"
+    }
+  },
+  {
+    "model": "library.publisher",
+    "pk": 2,
+    "fields": {
+      "name": "NovaPress",
+      "country": "United States",
+      "website": "https://novapress.example.com"
+    }
+  },
+  {
+    "model": "library.category",
+    "pk": 1,
+    "fields": {
+      "name": "Fiction",
+      "description": "Imaginative or invented prose works."
+    }
+  },
+  {
+    "model": "library.category",
+    "pk": 2,
+    "fields": {
+      "name": "Science",
+      "description": "Works about science and the natural world."
+    }
+  },
+  {
+    "model": "library.category",
+    "pk": 3,
+    "fields": {
+      "name": "Technology",
+      "description": "Works about computing, engineering and innovation."
+    }
+  },
+  {
+    "model": "library.book",
+    "pk": 1,
+    "fields": {
+      "title": "The Silent Forest",
+      "isbn": "9783161484100",
+      "publication_year": 2019,
+      "price": "25.00",
+      "author": 1,
+      "categories": [1, 2]
+    }
+  },
+  {
+    "model": "library.book",
+    "pk": 2,
+    "fields": {
+      "title": "Digital Horizons",
+      "isbn": "9780306406157",
+      "publication_year": 2021,
+      "price": "19.90",
+      "author": 2,
+      "categories": [3]
+    }
+  },
+  {
+    "model": "library.book",
+    "pk": 3,
+    "fields": {
+      "title": "The Quantum Garden",
+      "isbn": "9780545010221",
+      "publication_year": 2022,
+      "price": "30.50",
+      "author": 1,
+      "categories": [2]
+    }
+  },
+  {
+    "model": "library.book",
+    "pk": 4,
+    "fields": {
+      "title": "Programming in Python",
+      "isbn": "9780131687967",
+      "publication_year": 2020,
+      "price": "22.75",
+      "author": 2,
+      "categories": [2, 3]
+    }
+  },
+  {
+    "model": "library.publication",
+    "pk": 1,
+    "fields": {
+      "book": 1,
+      "publisher": 1,
+      "publication_date": "2019-03-10",
+      "edition": 2
+    }
+  },
+  {
+    "model": "library.publication",
+    "pk": 2,
+    "fields": {
+      "book": 1,
+      "publisher": 2,
+      "publication_date": "2019-04-05",
+      "edition": 1
+    }
+  },
+  {
+    "model": "library.publication",
+    "pk": 3,
+    "fields": {
+      "book": 2,
+      "publisher": 2,
+      "publication_date": "2021-06-15",
+      "edition": 1
+    }
+  },
+  {
+    "model": "library.publication",
+    "pk": 4,
+    "fields": {
+      "book": 3,
+      "publisher": 1,
+      "publication_date": "2022-09-01",
+      "edition": 1
+    }
+  },
+  {
+    "model": "library.publication",
+    "pk": 5,
+    "fields": {
+      "book": 4,
+      "publisher": 1,
+      "publication_date": "2020-01-20",
+      "edition": 3
+    }
+  }
+]
