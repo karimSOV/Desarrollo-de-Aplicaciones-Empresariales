@@ -1,0 +1,48 @@
+{% extends 'movies/base.html' %}
+
+{% block title %}Recomendaciones para {{ movie.title }} · CineLab{% endblock %}
+
+{% block content %}
+  <section class="hero" id="rec-hero" aria-label="{{ movie.title }}">
+    <div class="hero-slide active"
+      data-id="{{ movie.pk }}" data-title="{{ movie.title }}" data-year="{{ movie.year }}"
+      data-synopsis="{{ movie.synopsis }}" data-director="{{ movie.director|default_if_none:'' }}"
+      data-genres="{% for g in movie.genres.all %}{{ g.name }}{% if not forloop.last %}|{% endif %}{% endfor %}"
+      data-poster="{% if movie.poster %}{{ movie.poster.url }}{% endif %}"
+      data-rec="{% url 'movies:recommendations' movie.pk %}">
+      <span class="art"><span class="art-title"></span></span>
+    </div>
+    <div class="hero-fade"></div>
+    <div class="hero-content">
+      <div class="hero-kicker">Porque te interesó</div>
+      <h1>{{ movie.title }}</h1>
+      <div class="hero-meta">
+        <span>{{ movie.year }}</span>
+        {% if movie.director %}<span>Dir. {{ movie.director }}</span>{% endif %}
+        <span>{% for g in movie.genres.all %}{{ g.name }}{% if not forloop.last %} • {% endif %}{% empty %}Sin géneros{% endfor %}</span>
+      </div>
+      <p>{{ movie.synopsis }}</p>
+      <a class="btn btn-soft" href="{% url 'movies:movie_list' %}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg> Volver al catálogo
+      </a>
+    </div>
+  </section>
+
+  <div class="rows">
+    {% if recommendations %}
+      <section class="row">
+        <h2>Películas del mismo género · mejor valoradas</h2>
+        <button class="row-arrow left" type="button" aria-label="Anterior"></button>
+        <div class="row-track">
+          {% for m in recommendations %}{% include 'movies/_card.html' %}{% endfor %}
+        </div>
+        <button class="row-arrow right" type="button" aria-label="Siguiente"></button>
+      </section>
+    {% else %}
+      <div class="empty" style="margin-top:0">
+        <p>Todavía no hay películas valoradas que compartan género con esta.</p>
+        <a class="btn btn-primary" href="{% url 'movies:movie_list' %}">Explorar catálogo</a>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
