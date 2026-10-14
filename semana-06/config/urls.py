@@ -9,6 +9,7 @@ urlpatterns = [
     path("", RedirectView.as_view(pattern_name="movies:movie_list")),
     path("admin/", admin.site.urls),
     path("movies/", include("movies.urls")),
+    path("news/", include("news.urls")),
 ]
 
 if settings.DEBUG:
