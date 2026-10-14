@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Portal de noticias{% endblock %}</title>
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="site-name" href="{% url 'news:home' %}">Portal de noticias</a>
+            <nav class="site-nav">
+                <a href="{% url 'news:home' %}">Portada</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout">
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <aside class="sidebar">
+            {% block sidebar %}
+                <h2 class="sidebar-title">Categorías</h2>
+                <ul class="category-list">
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'news:category' category.pk %}">{{ category.name }}</a>
+                            <span class="count">{{ category.article_count }}</span>
+                        </li>
+                    {% empty %}
+                        <li>Todavía no hay categorías.</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        Desarrollo de Aplicaciones Empresariales · Laboratorio 6
+    </footer>
+</body>
+</html>
