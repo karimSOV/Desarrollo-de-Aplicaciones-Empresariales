@@ -9,6 +9,7 @@ semana y su historial de commits lleva el prefijo de la semana.
 | 3 | [`semana-03`](semana-03) | Formularios y app `quiz` (exámenes, preguntas y opciones) | [LAB-03-DJANGO](https://github.com/karimSOV/LAB-03-DJANGO) |
 | 4 | [`semana-04`](semana-04) | Relaciones entre modelos: app `library` | [laboratorio-04-django-relaciones-modelos](https://github.com/karimSOV/laboratorio-04-django-relaciones-modelos) |
 | 5 | [`semana-05`](semana-05) | Administrador de Django: app `movies` y catálogo público | [django-lab05](https://github.com/karimSOV/django-lab05) |
+| 6 | [`semana-06`](semana-06) | Motor de plantillas: portal de noticias con la app `news` (parte de la semana 5) | — |
 
 Las instrucciones para ejecutar cada proyecto están en el README de su
 carpeta, cuando existe.
