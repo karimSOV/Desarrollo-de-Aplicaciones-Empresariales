@@ -1,0 +1,21 @@
+<article class="card">
+    {% if article.image %}
+        <a class="card-image" href="{% url 'news:article_detail' article.pk %}">
+            <img src="{{ article.image.url }}" alt="{{ article.title }}">
+        </a>
+    {% endif %}
+    <div class="card-body">
+        <p class="card-meta">
+            {{ article.published_at|date:"d/m/Y" }} · {{ article.author.name }}
+        </p>
+        <h3 class="card-title">
+            <a href="{% url 'news:article_detail' article.pk %}">{{ article.title }}</a>
+        </h3>
+        <p class="card-summary">{{ article.summary|truncatewords:25 }}</p>
+        <p class="card-categories">
+            {% for category in article.categories.all %}
+                <a class="tag" href="{% url 'news:category' category.pk %}">{{ category.name }}</a>
+            {% endfor %}
+        </p>
+    </div>
+</article>
