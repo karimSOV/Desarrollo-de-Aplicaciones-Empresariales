@@ -10,6 +10,7 @@ semana y su historial de commits lleva el prefijo de la semana.
 | 4 | [`semana-04`](semana-04) | Relaciones entre modelos: app `library` | [laboratorio-04-django-relaciones-modelos](https://github.com/karimSOV/laboratorio-04-django-relaciones-modelos) |
 | 5 | [`semana-05`](semana-05) | Administrador de Django: app `movies` y catálogo público | [django-lab05](https://github.com/karimSOV/django-lab05) |
 | 6 | [`semana-06`](semana-06) | Motor de plantillas: portal de noticias con la app `news` (parte de la semana 5) | — |
+| 7 | [`semana-07`](semana-07) | ORM con IA: duelo y verificador, app `blog` (parte de la semana 6) | [dae-s07-orm-con-ia](https://github.com/Hellscythe25/dae-s07-orm-con-ia) (código base) |
 
 Las instrucciones para ejecutar cada proyecto están en el README de su
 carpeta, cuando existe.

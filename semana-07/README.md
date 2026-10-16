@@ -1,9 +1,65 @@
-# Semana 6: motor de plantillas con Django
+# Semana 7: ORM con IA, duelo y verificador
 
-Proyecto de Django con configuración en `config` y dos aplicaciones. El
-laboratorio es acumulativo: parte del proyecto de la semana 5 (`movies`, con su
-administrador, catálogo y recomendaciones) y agrega `news`, un portal de
-noticias construido con el motor de plantillas de Django.
+Proyecto de Django con configuración en `config` y tres aplicaciones. El
+laboratorio es acumulativo: parte del proyecto de la semana 6 (`movies` y
+`news`) y le agrega `blog`, la aplicación del laboratorio extra de la semana 7.
+
+## ORM con IA: duelo y verificador
+
+El código base de la app `blog` (modelos, datos de prueba, el duelo, el agente y
+sus pruebas) viene del repositorio del laboratorio
+[`Hellscythe25/dae-s07-orm-con-ia`](https://github.com/Hellscythe25/dae-s07-orm-con-ia).
+Se integró en este proyecto con dos cambios: `blog` se declaró en
+`INSTALLED_APPS` y su portada se montó en `/blog/`, porque la raíz `/` ya lleva al
+catálogo de películas.
+
+### Puesta en marcha
+
+Con el entorno virtual de esta carpeta y la clave configurada en la sesión:
+
+```powershell
+$env:SECRET_KEY = "clave-local-de-prueba-0123456789-abcdefghijklmnopqrstuvwxyz"
+$env:DEBUG = "1"
+.\venv\Scripts\python.exe manage.py migrate
+.\venv\Scripts\python.exe manage.py seed_blog
+```
+
+`seed_blog` borra y vuelve a cargar solo los datos del blog (4 autores, 15
+artículos y 23 comentarios); no toca películas, noticias ni usuarios.
+
+### Parte 1: el duelo
+
+Las ocho consultas se escriben en `blog/duel/team.py`, una función por
+pregunta, y se comprueban con:
+
+```powershell
+.\venv\Scripts\python.exe manage.py duel
+.\venv\Scripts\python.exe manage.py duel --question q4
+.\venv\Scripts\python.exe manage.py duel --source ai
+```
+
+### Parte 2: del rojo al verde
+
+```powershell
+.\venv\Scripts\python.exe manage.py test blog.tests.test_front_page
+```
+
+La prueba `test_front_page_runs_two_queries` falla a propósito al inicio
+(23 consultas contra 2 esperadas). Se corrige en `blog/queries.py`. La portada
+del blog está en `http://127.0.0.1:8000/blog/`.
+
+### Parte 3: la frontera
+
+```powershell
+.\venv\Scripts\python.exe manage.py agent --intent '{"action": "posts_per_author", "args": {}}'
+.\venv\Scripts\python.exe manage.py agent --intent '{"action": "comments_of_post", "args": {"post_id": 1}}'
+.\venv\Scripts\python.exe manage.py agent --intent '{"action": "delete_comments_of_post", "args": {"post_id": 1}}'
+.\venv\Scripts\python.exe manage.py agent --intent '{"action": "run_sql", "args": {}}'
+```
+
+`blog/agent/registry.py` es una lista cerrada de acciones: un modelo solo puede
+pedir las que están ahí, y los borrados necesitan un plan aprobado por una
+persona.
 
 ## Portal de noticias
 
@@ -230,7 +286,7 @@ Configura `SECRET_KEY` en la sesión y ejecuta:
 .\venv\Scripts\python.exe manage.py test --verbosity 2
 ```
 
-Los 44 tests (33 de `movies` y 11 de `news`) usan `django.test` y una base temporal en memoria, que Django
+Los tests de `movies` (33) y de `news` (11) usan `django.test` y una base temporal en memoria, que Django
 destruye al finalizar. Los tests generan sus propios datos y llaman a
 `setup_editors` solo en esa base temporal; no modifican `db.sqlite3`.
 
@@ -242,6 +298,10 @@ consultada, el límite de cinco, la ausencia de duplicados y el 404. Del
 catálogo se prueban la redirección desde la raíz, el promedio por película y
 la búsqueda por título, director y género.
 
+La app `blog` trae sus propias pruebas (seed, duelo, portada y agente). Al
+inicio del laboratorio la suite completa ejecuta 68 tests con un solo fallo
+esperado: `test_front_page_runs_two_queries`, que se corrige en la Parte 2.
+
 Del portal de noticias se prueban la portada vacía y con noticias ordenadas de
 la más reciente a la más antigua, el uso de la base y del fragmento de
 tarjeta, el formato de fecha, el recorte del resumen, el detalle con autor y
@@ -250,12 +310,11 @@ los enlaces con nombre y el escapado de HTML.
 
 ## Historial
 
-Los commits de esta semana llevan el prefijo `Semana 6`: uno para partir del
-proyecto de la semana 5, uno por cada paso del 1 al 12, uno para las pruebas y
-uno para este README.
+Los commits de esta semana llevan el prefijo `Semana 7`. El primero copia el
+proyecto de la semana 6 y el siguiente agrega el código base del laboratorio.
 
 ```powershell
-git log --oneline -- semana-06
+git log --oneline -- semana-07
 ```
 
 ## Capturas
