@@ -298,9 +298,12 @@ consultada, el límite de cinco, la ausencia de duplicados y el 404. Del
 catálogo se prueban la redirección desde la raíz, el promedio por película y
 la búsqueda por título, director y género.
 
-La app `blog` trae sus propias pruebas (seed, duelo, portada y agente). Al
-inicio del laboratorio la suite completa ejecuta 68 tests con un solo fallo
-esperado: `test_front_page_runs_two_queries`, que se corrige en la Parte 2.
+La app `blog` trae sus propias pruebas (seed, duelo, portada y agente). La suite
+completa ejecuta 68 tests. Al inicio del laboratorio falla
+`test_front_page_runs_two_queries`, que se corrige en la Parte 2. Al escribir las
+consultas del duelo en `team.py` falla `test_the_starter_has_nothing_written`:
+esa prueba solo comprueba que el código inicial venía vacío, así que su fallo es
+esperado una vez resuelto el duelo.
 
 Del portal de noticias se prueban la portada vacía y con noticias ordenadas de
 la más reciente a la más antigua, el uso de la base y del fragmento de
