@@ -2,20 +2,194 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Blog del laboratorio</title>
+  <style>
+    /* Only the data the view already loads is used (author and tags), so the
+       page keeps running two queries. */
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --text: #1f2430;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --accent: #4f46e5;
+      --accent-soft: #eef2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .hero {
+      padding: 48px 20px 40px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #ffffff;
+    }
+
+    .hero-inner,
+    .content {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .hero-kicker {
+      margin: 0 0 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 1.4rem + 2vw, 2.6rem);
+      line-height: 1.15;
+    }
+
+    .hero-count {
+      margin: 8px 0 0;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 32px 20px 48px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(16, 24, 40, 0.08);
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .avatar {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .author {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: auto 0 0;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .no-tags {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    .empty {
+      padding: 32px;
+      border: 1px dashed var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .footer {
+      padding: 0 20px 32px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <h1>Artículos publicados</h1>
-  {% for post in posts %}
-    <article>
-      <h2>{{ post.title }}</h2>
-      <p>Por {{ post.author.name }} · {{ post.published_at|date:"d/m/Y" }}</p>
-      <p>
-        {% for tag in post.tags.all %}<span>#{{ tag.name }}</span>{% empty %}<em>sin etiquetas</em>{% endfor %}
-      </p>
-    </article>
-  {% empty %}
-    <p>No hay artículos publicados.</p>
-  {% endfor %}
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Blog del laboratorio</p>
+      <h1>Artículos publicados</h1>
+      <p class="hero-count">{{ posts|length }} artículo{{ posts|length|pluralize }} publicado{{ posts|length|pluralize }}</p>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="grid">
+      {% for post in posts %}
+        <article class="card">
+          <h2 class="card-title">{{ post.title }}</h2>
+          <p class="meta">
+            <span class="avatar">{{ post.author.name|first }}</span>
+            <span><span class="author">{{ post.author.name }}</span> · {{ post.published_at|date:"d/m/Y" }}</span>
+          </p>
+          <p class="tags">
+            {% for tag in post.tags.all %}
+              <span class="tag">#{{ tag.name }}</span>
+            {% empty %}
+              <span class="no-tags">sin etiquetas</span>
+            {% endfor %}
+          </p>
+        </article>
+      {% empty %}
+        <p class="empty">No hay artículos publicados.</p>
+      {% endfor %}
+    </div>
+  </main>
+
+  <footer class="footer">ORM con IA · Desarrollo de Aplicaciones Empresariales</footer>
 </body>
 </html>
