@@ -1,6 +1,6 @@
 # Desarrollo de Aplicaciones Empresariales
 
-Laboratorios de Django del curso Desarrollo de Aplicaciones Empresariales
+Laboratorios de Django y React del curso Desarrollo de Aplicaciones Empresariales
 (Tecsup, sección 4-C24-A). Cada carpeta contiene el proyecto entregado esa
 semana y su historial de commits lleva el prefijo de la semana.
 
@@ -11,6 +11,7 @@ semana y su historial de commits lleva el prefijo de la semana.
 | 5 | [`semana-05`](semana-05) | Administrador de Django: app `movies` y catálogo público | [django-lab05](https://github.com/karimSOV/django-lab05) |
 | 6 | [`semana-06`](semana-06) | Motor de plantillas: portal de noticias con la app `news` (parte de la semana 5) | — |
 | 7 | [`semana-07`](semana-07) | ORM con IA: duelo y verificador, app `blog` (parte de la semana 6) | [dae-s07-orm-con-ia](https://github.com/Hellscythe25/dae-s07-orm-con-ia) (código base) |
+| 9 | [`semana-09`](semana-09) | ReactJS con Vite: cartelera de CineLab con componentes y props (películas de la semana 7) | — |
 
 Las instrucciones para ejecutar cada proyecto están en el README de su
 carpeta, cuando existe.
