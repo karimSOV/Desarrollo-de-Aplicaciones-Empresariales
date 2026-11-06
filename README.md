@@ -12,6 +12,7 @@ semana y su historial de commits lleva el prefijo de la semana.
 | 6 | [`semana-06`](semana-06) | Motor de plantillas: portal de noticias con la app `news` (parte de la semana 5) | — |
 | 7 | [`semana-07`](semana-07) | ORM con IA: duelo y verificador, app `blog` (parte de la semana 6) | [dae-s07-orm-con-ia](https://github.com/Hellscythe25/dae-s07-orm-con-ia) (código base) |
 | 9 | [`semana-09`](semana-09) | ReactJS con Vite: cartelera de CineLab con componentes y props (películas de la semana 7) | — |
+| 10 | [`semana-10`](semana-10) | React: botón reutilizable, favoritas con estado, buscador con retardo y localStorage (parte de la semana 9) | — |
 
 Las instrucciones para ejecutar cada proyecto están en el README de su
 carpeta, cuando existe.

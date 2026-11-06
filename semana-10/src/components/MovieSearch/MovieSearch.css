@@ -1,0 +1,8 @@
+.movie-search {
+  max-width: 520px;
+}
+
+.movie-search-row {
+  display: flex;
+  gap: 10px;
+}

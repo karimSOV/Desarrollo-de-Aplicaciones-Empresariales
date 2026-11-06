@@ -1,0 +1,39 @@
+.movie-list {
+  padding: 24px var(--page-x) 0;
+  scroll-margin-top: 80px;
+}
+
+.movie-list-title {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.movie-list-subtitle {
+  margin: 4px 0 20px;
+  color: var(--muted);
+}
+
+/* Empty state: no movie matches the search */
+.movie-list-empty {
+  padding: 48px 24px;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+}
+
+.movie-list-empty-icon {
+  margin: 0;
+  font-size: 2.6rem;
+}
+
+.movie-list-empty-title {
+  margin: 8px 0 6px;
+  font-size: 1.25rem;
+}
+
+.movie-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
