@@ -1,44 +1,55 @@
+/* Transparent bar over the banner, darker at the top */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
+  right: 0;
+  left: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
-  gap: 28px;
-  padding: 16px var(--page-x);
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
+  gap: 34px;
+  height: var(--header-h);
+  padding: 0 var(--page-x);
+  background: linear-gradient(180deg, rgba(8, 8, 11, 0.95) 0%, rgba(8, 8, 11, 0.7) 55%, rgba(8, 8, 11, 0) 100%);
 }
 
 .header-logo {
   color: var(--accent);
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 1px;
   text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 0 2px 14px rgba(31, 111, 255, 0.45);
 }
 
 .header-nav {
   display: flex;
-  gap: 20px;
-  margin-left: auto;
+  gap: 22px;
   font-size: 0.92rem;
 }
 
 .header-nav a {
-  color: var(--muted);
+  color: #d6d6dc;
   font-weight: 500;
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 .header-nav a:hover {
-  color: var(--text);
+  color: #fff;
 }
 
 .header-favorites {
-  border: 1.5px solid var(--star);
-  background: #fff6e5;
-  color: #b7791f;
+  margin-left: auto;
+  border: 1px solid rgba(31, 111, 255, 0.7);
+  background: rgba(31, 111, 255, 0.16);
+  color: var(--star);
   text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  .header-nav {
+    display: none;
+  }
 }

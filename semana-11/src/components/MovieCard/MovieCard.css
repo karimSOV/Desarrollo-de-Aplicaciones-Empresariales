@@ -1,21 +1,22 @@
 .movie-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
 }
 
+/* Grows a little over the others, like a streaming catalog */
 .movie-card:hover {
-  transform: translateY(-4px);
+  z-index: 2;
+  transform: scale(1.04);
   box-shadow: var(--shadow-lg);
 }
 
 .movie-card-selected {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
 /* The poster is a button: clicking it shows the movie in the banner */
@@ -35,30 +36,49 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s var(--ease), filter 0.3s;
+}
+
+.movie-card:hover .movie-card-poster img {
+  transform: scale(1.06);
+  filter: brightness(1.08);
+}
+
+/* Shade at the bottom of the poster so it joins the card */
+.movie-card-poster::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 40%;
+  background: linear-gradient(0deg, var(--surface) 0%, rgba(26, 26, 32, 0) 100%);
 }
 
 .movie-card-rating {
   position: absolute;
   top: 10px;
   right: 10px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: rgba(31, 35, 48, 0.85);
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.72);
   color: var(--star);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.82rem;
+  font-weight: 800;
+  backdrop-filter: blur(4px);
 }
 
 .movie-card-favorite-badge {
   position: absolute;
   top: 10px;
   left: 10px;
-  padding: 4px 9px;
-  border-radius: 999px;
-  background: var(--star);
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: var(--accent);
   color: #fff;
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .movie-card-body {
@@ -66,12 +86,16 @@
   flex: 1;
   flex-direction: column;
   gap: 10px;
-  padding: 14px;
+  margin-top: -18px;
+  padding: 0 14px 14px;
+  position: relative;
 }
 
 .movie-card-title {
   margin: 0;
-  font-size: 1.05rem;
+  color: #fff;
+  font-size: 1.02rem;
+  font-weight: 800;
   line-height: 1.25;
 }
 
@@ -84,7 +108,7 @@
 .movie-card-synopsis {
   margin: 0;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   line-height: 1.45;
 }
 
@@ -98,9 +122,10 @@
 }
 
 .movie-card-showtimes li {
-  padding: 5px 10px;
-  border: 1.5px solid var(--line);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e9e9ee;
+  font-size: 0.82rem;
+  font-weight: 700;
 }

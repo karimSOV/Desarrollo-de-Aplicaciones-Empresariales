@@ -101,7 +101,13 @@ function App() {
         />
       </main>
       <Footer cinema={cinema} />
-      <Toaster position="bottom-right" toastOptions={{ style: { fontFamily: 'Inter, sans-serif' } }} />
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: { fontFamily: 'Inter, sans-serif', background: '#1f1f26', color: '#f3f3f5', border: '1px solid #33333d' },
+          success: { iconTheme: { primary: '#1f6fff', secondary: '#ffffff' } },
+        }}
+      />
     </>
   )
 }

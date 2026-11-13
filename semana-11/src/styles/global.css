@@ -16,6 +16,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
 a {
   color: inherit;
 }
@@ -46,48 +51,53 @@ p {
 /* Forms: labels and text inputs */
 .field-label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 .field-input {
   width: 100%;
   min-width: 0;
-  padding: 11px 16px;
-  border: 1.5px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  background: rgba(15, 15, 19, 0.65);
   color: var(--text);
   font: inherit;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .field-input::placeholder {
-  color: #9aa0b1;
+  color: #8b8b96;
 }
 
 .field-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  border-color: #fff;
+  background: rgba(15, 15, 19, 0.85);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
   outline: none;
 }
 
-/* Small rounded labels: classification, genre, duration */
+/* Small labels: classification, genre, duration */
 .tag {
   display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--surface-2);
-  color: var(--muted);
-  font-size: 0.78rem;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cfcfd6;
+  font-size: 0.76rem;
   font-weight: 600;
 }
 
 .tag-accent {
-  background: var(--accent-soft);
-  color: var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: transparent;
+  color: #fff;
 }
 
 /* Utilities */
@@ -103,15 +113,17 @@ p {
 .eyebrow {
   margin: 0 0 4px;
   color: var(--accent);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 3px;
   text-transform: uppercase;
 }
 
 .section-title {
   margin: 0 0 16px;
-  font-size: 1.6rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
 /* Utility: small rounded counter or badge */
@@ -119,9 +131,9 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
+  padding: 6px 13px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   white-space: nowrap;
 }
