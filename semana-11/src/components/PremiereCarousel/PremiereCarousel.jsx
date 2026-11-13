@@ -25,9 +25,14 @@ function PremiereCarousel({ premieres, cardsPerView }) {
       <div className="carousel-track" ref={trackRef} style={{ gridAutoColumns: columnWidth }}>
         {premieres.map((movie) => (
           <article key={movie.id} className="premiere-card">
-            <div className="premiere-card-art" style={{ '--hue': (movie.id * 47) % 360 }}>
-              <span>{movie.title}</span>
-            </div>
+            {movie.image ? (
+              <img className="premiere-card-poster" src={movie.image} alt={`Póster de ${movie.title}`} />
+            ) : (
+              // Without a poster, a gradient with the title takes its place
+              <div className="premiere-card-art" style={{ '--hue': (movie.id * 47) % 360 }}>
+                <span>{movie.title}</span>
+              </div>
+            )}
             <div className="premiere-card-body">
               <h3 className="premiere-card-title">{movie.title}</h3>
               <p className="premiere-card-date">Estreno: {formatDate(movie.releaseDate)}</p>

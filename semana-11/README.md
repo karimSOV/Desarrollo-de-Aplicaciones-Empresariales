@@ -6,7 +6,7 @@ trabaja en la rama `semana-11` del repositorio. Se agregan:
 - el patrón adaptador para los datos de las películas;
 - avisos emergentes con la biblioteca `react-hot-toast`;
 - los hooks propios `useDebounce`, `useWindowSize` y `usePremieres`;
-- la sección de estrenos con esqueleto de carga, carrusel y estado de error;
+- la sección de estrenos con esqueleto de carga, carrusel con pósters y estado de error;
 - el contador de favoritas en la cabecera y el botón para limpiar el filtro.
 
 ## Cómo ejecutarlo
