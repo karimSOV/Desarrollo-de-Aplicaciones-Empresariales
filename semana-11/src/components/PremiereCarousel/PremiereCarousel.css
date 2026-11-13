@@ -1,0 +1,68 @@
+.carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.carousel-controls .button {
+  padding: 6px 16px;
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.premiere-card {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  scroll-snap-align: start;
+}
+
+/* No poster yet: a gradient with the title takes its place */
+.premiere-card-art {
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 16 / 10;
+  padding: 14px;
+  background: linear-gradient(135deg, hsl(var(--hue) 80% 72%), hsl(calc(var(--hue) + 50) 75% 55%));
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.premiere-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px 14px 14px;
+}
+
+.premiere-card-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.premiere-card-date {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}

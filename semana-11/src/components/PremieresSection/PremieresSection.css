@@ -1,0 +1,44 @@
+.premieres {
+  padding: 32px var(--page-x) 8px;
+  scroll-margin-top: 80px;
+}
+
+.premieres-message {
+  margin: -4px 0 14px;
+}
+
+.premieres-skeletons {
+  display: grid;
+  gap: 16px;
+}
+
+.premieres-skeleton-card {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.premieres-skeleton-art {
+  aspect-ratio: 16 / 10;
+}
+
+.premieres-skeleton-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px 14px;
+}
+
+.premieres-error {
+  padding: 24px;
+  border: 1.5px solid #f5c2c0;
+  border-radius: var(--radius);
+  background: #fff5f5;
+}
+
+.premieres-error-title {
+  margin: 0 0 6px;
+  color: #b42318;
+  font-size: 1.1rem;
+}

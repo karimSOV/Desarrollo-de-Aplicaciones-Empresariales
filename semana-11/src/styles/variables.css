@@ -1,0 +1,17 @@
+/* Design tokens: the same palette as the CineLab catalog of week 7 */
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef0f6;
+  --text: #1f2330;
+  --muted: #6b7185;
+  --line: #e3e6ef;
+  --accent: #ff4f5a;
+  --accent-soft: #ffe8ea;
+  --star: #f5a524;
+  --radius: 10px;
+  --shadow-sm: 0 2px 8px rgba(31, 35, 48, 0.08);
+  --shadow-lg: 0 18px 50px rgba(31, 35, 48, 0.22);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --page-x: 4vw;
+}
